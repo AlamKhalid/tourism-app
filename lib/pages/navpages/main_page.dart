@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../home_page.dart';
+import '../landing_page.dart';
 import './bar_item.dart';
 import './my_page.dart';
-import './search_page.dart';
+import './flights_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -13,9 +13,9 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   List pages = [
-    HomePage(),
+    LandingPage(),
     BarItemPage(),
-    SearchPage(),
+    FlightsPage(),
     MyPage(),
   ];
 
@@ -54,8 +54,8 @@ class _MainPageState extends State<MainPage> {
             icon: Icon(Icons.bar_chart_sharp),
           ),
           BottomNavigationBarItem(
-            label: 'Search',
-            icon: Icon(Icons.search),
+            label: 'Flights',
+            icon: Icon(Icons.airplanemode_active),
           ),
           BottomNavigationBarItem(
             label: 'My',

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tourism_app/cubit/app_cubits.dart';
 import './pages/detail_pages.dart';
 import './pages/navpages/main_page.dart';
 import './pages/welcome_page.dart';
@@ -21,9 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: BlocProvider<AppCubits>(
-        create: (context) => AppCubits(),
-      ),
+      home: WelcomePage(),
     );
   }
 }

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tourism_app/pages/home_page.dart';
+import 'package:tourism_app/widgets/welcome_widget.dart';
 import '../widgets/responsive_button.dart';
 import '../misc/colors.dart';
 import '../widgets/app_large_text.dart';
 import '../widgets/app_text.dart';
+import './navpages/main_page.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -12,17 +15,32 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  List images = [
-    'welcome-one.png',
-    'welcome-two.png',
-    'welcome-three.png',
+  List welcomeList = [
+    {
+      'img': 'welcome-one.png',
+      'title': 'Trip Planner',
+      'desc':
+          'Organizing your trips and tours efficiently with day wise and hourly wise breakdown.'
+    },
+    {
+      'img': 'welcome-two.jpeg',
+      'title': 'Trip Planner',
+      'desc':
+          'Organizing your trips and tours efficiently with day wise and hourly wise breakdown.'
+    },
+    {
+      'img': 'welcome-three.png',
+      'title': 'Trip Planner',
+      'desc':
+          'Organizing your trips and tours efficiently with day wise and hourly wise breakdown.'
+    },
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView.builder(
         scrollDirection: Axis.vertical,
-        itemCount: images.length,
+        itemCount: welcomeList.length,
         itemBuilder: (_, index) => Container(
           width: double.maxFinite,
           height: double.maxFinite,
@@ -30,7 +48,7 @@ class _WelcomePageState extends State<WelcomePage> {
             image: DecorationImage(
               fit: BoxFit.cover,
               image: AssetImage(
-                "assets/images/${images[index]}",
+                "assets/images/${welcomeList[index]['img']}",
               ),
             ),
           ),
@@ -43,31 +61,9 @@ class _WelcomePageState extends State<WelcomePage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AppLargeText(text: 'Trips'),
-                    AppText(text: 'Mountain', size: 30),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    SizedBox(
-                      width: 250,
-                      child: AppText(
-                        text:
-                            'Moutains hike give you and incredible sense of freedom along with edurance test',
-                        color: AppColors.textColor2,
-                        size: 14,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    ResponsiveButton(
-                      width: 120,
-                    ),
-                  ],
-                ),
+                WelcomeWidget(
+                    title: welcomeList[index]['title'],
+                    description: welcomeList[index]['desc']),
                 Column(
                   children: List.generate(
                       3,
@@ -80,8 +76,8 @@ class _WelcomePageState extends State<WelcomePage> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
                               color: index == indexDots
-                                  ? AppColors.mainColor
-                                  : AppColors.mainColor.withOpacity(0.3),
+                                  ? AppColors.textColor1
+                                  : AppColors.textColor1.withOpacity(0.3),
                             ),
                           )),
                 ),
