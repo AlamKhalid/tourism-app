@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:tourism_app/misc/colors.dart';
 import 'package:tourism_app/pages/landing_page.dart';
 import 'package:tourism_app/pages/navpages/main_page.dart';
-import 'package:tourism_app/widgets/app_large_text.dart';
-import 'package:tourism_app/widgets/app_text.dart';
+import 'package:tourism_app/screens/sign_up/sign_up_screen.dart';
+import 'package:tourism_app/widgets/common/app_large_text.dart';
+import 'package:tourism_app/widgets/common/app_text.dart';
 
 class WelcomeWidget extends StatelessWidget {
   final String title;
@@ -32,34 +33,32 @@ class WelcomeWidget extends StatelessWidget {
         const SizedBox(
           height: 40,
         ),
-        GestureDetector(
-            onTap: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => MainPage())),
-            child: Container(
-              width: 120,
-              height: 50,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => MainPage()));
-                },
-                child: Row(
-                  children: [
-                    Expanded(
-                        child: Center(
-                      child: AppText(text: 'Skip', color: Colors.white),
-                    )),
-                    const Icon(Icons.chevron_right),
-                  ],
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: AppColors.mainColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
+        Container(
+          width: 120,
+          height: 50,
+          child: ElevatedButton(
+            onPressed: () {
+              // Navigator.of(context).pushNamed(SignUpScreen.routeName);
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => MainPage()));
+            },
+            child: Row(
+              children: [
+                Expanded(
+                    child: Center(
+                  child: AppText(text: 'Skip', color: Colors.white),
+                )),
+                const Icon(Icons.chevron_right),
+              ],
+            ),
+            style: ElevatedButton.styleFrom(
+              primary: AppColors.mainColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
               ),
-            )),
+            ),
+          ),
+        ),
       ],
     );
   }

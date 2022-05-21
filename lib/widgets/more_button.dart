@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tourism_app/misc/colors.dart';
 import 'package:tourism_app/pages/home_page.dart';
+import 'package:tourism_app/pages/navpages/flights_page.dart';
 
 class MoreButton extends StatelessWidget {
   final String city;

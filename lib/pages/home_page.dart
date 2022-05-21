@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tourism_app/misc/colors.dart';
 import 'package:tourism_app/pages/detail_pages.dart';
-import 'package:tourism_app/widgets/app_large_text.dart';
-import 'package:tourism_app/widgets/app_text.dart';
-import 'package:tourism_app/widgets/header.dart';
+import 'package:tourism_app/widgets/common/app_large_text.dart';
+import 'package:tourism_app/widgets/common/app_text.dart';
+import 'package:tourism_app/widgets/common/header.dart';
+import 'package:tourism_app/widgets/list_places_vertical.dart';
 
 import '../widgets/places_list_horizontal.dart';
 
@@ -27,6 +28,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    bool keyboardIsOpen = MediaQuery.of(context).viewInsets.bottom != 0;
     var chipNames = ['Places', 'Hotels', 'Restaurants'];
     TabController _tabController = TabController(length: 3, vsync: this);
 
@@ -42,47 +44,47 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             // tabbar
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: TabBar(
-                    labelPadding: const EdgeInsets.only(
-                      left: 20,
-                      right: 20,
+              child: TabBar(
+                  labelPadding: const EdgeInsets.only(
+                    left: 20,
+                    right: 20,
+                  ),
+                  controller: _tabController,
+                  unselectedLabelColor: AppColors.textColor1,
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  indicator: BoxDecoration(
+                      gradient: LinearGradient(colors: [
+                        AppColors.headingColor1,
+                        AppColors.textColor6
+                      ]),
+                      borderRadius: BorderRadius.circular(50),
+                      color: AppColors.textColor2),
+                  tabs: [
+                    Tab(
+                      height: 30,
+                      text: 'Places',
                     ),
-                    controller: _tabController,
-                    unselectedLabelColor: AppColors.textColor1,
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    indicator: BoxDecoration(
-                        gradient: LinearGradient(colors: [
-                          AppColors.headingColor1,
-                          AppColors.textColor6
-                        ]),
-                        borderRadius: BorderRadius.circular(50),
-                        color: AppColors.textColor2),
-                    tabs: [
-                      Tab(
-                        text: 'Places',
-                      ),
-                      Tab(
-                        text: 'Hotels',
-                      ),
-                      Tab(
-                        text: 'Restaurants',
-                      ),
-                    ]),
-              ),
+                    Tab(
+                      height: 30,
+                      text: 'Hotels',
+                    ),
+                    Tab(
+                      height: 30,
+                      text: 'Restaurants',
+                    ),
+                  ]),
             ),
             Container(
               padding: const EdgeInsets.only(
                 top: 10,
                 left: 20,
               ),
-              height: 300,
+              height: 500,
               width: double.maxFinite,
               child: TabBarView(
                 controller: _tabController,
                 children: [
-                  Text('Hi'),
+                  ListPlacesVertical(),
                   Text('There'),
                   Text('Bye'),
                 ],
@@ -91,26 +93,29 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ],
         ),
       ),
-      floatingActionButton: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              AppColors.textColor2,
-              AppColors.textColor4,
-            ],
+      floatingActionButton: Visibility(
+        visible: !keyboardIsOpen,
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 10),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                AppColors.textColor2,
+                AppColors.textColor4,
+              ],
+            ),
+            borderRadius: BorderRadius.circular(5),
           ),
-          borderRadius: BorderRadius.circular(5),
-        ),
-        width: double.infinity,
-        height: 50.0,
-        child: new RawMaterialButton(
-          elevation: 0.0,
-          child: AppLargeText(
-              text: 'I T I N E R A T E    M Y    T R I P',
-              size: 16,
-              color: Colors.white),
-          onPressed: () {},
+          width: double.infinity,
+          height: 50.0,
+          child: new RawMaterialButton(
+            elevation: 0.0,
+            child: AppLargeText(
+                text: 'I T I N E R A T E    M Y    T R I P',
+                size: 16,
+                color: Colors.white),
+            onPressed: () {},
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

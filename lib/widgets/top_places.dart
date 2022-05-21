@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tourism_app/misc/colors.dart';
-import 'package:tourism_app/widgets/app_large_text.dart';
-import 'package:tourism_app/widgets/app_text.dart';
+import 'package:tourism_app/widgets/common/app_large_text.dart';
+import 'package:tourism_app/widgets/common/app_text.dart';
 import 'package:tourism_app/widgets/more_button.dart';
 import 'package:tourism_app/widgets/places_list_horizontal.dart';
+import 'package:tourism_app/widgets/places_list_new.dart';
 
 class TopPlaces extends StatelessWidget {
   final String city;
@@ -40,21 +41,23 @@ class TopPlaces extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          PlacesListHorizontal(),
+          ListPlaces(),
           SizedBox(
             height: 10,
           ),
-          Container(
-            margin: const EdgeInsets.only(right: 20),
-            height: 5,
-            width: double.infinity,
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-              colors: [
-                AppColors.headingColor1,
-                AppColors.textColor2,
-              ],
-            )),
+          Center(
+            child: Container(
+              margin: const EdgeInsets.only(right: 20),
+              height: 5,
+              width: 100,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                colors: [
+                  AppColors.headingColor1,
+                  AppColors.textColor2,
+                ],
+              )),
+            ),
           ),
           SizedBox(
             height: 15,

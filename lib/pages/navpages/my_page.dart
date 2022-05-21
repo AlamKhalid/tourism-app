@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tourism_app/misc/colors.dart';
-import 'package:tourism_app/widgets/app_large_text.dart';
+import 'package:tourism_app/widgets/common/app_large_text.dart';
+import 'package:tourism_app/widgets/common/common_header.dart';
 import 'package:tourism_app/widgets/profile_menu.dart';
 import 'package:tourism_app/widgets/profile_pic.dart';
 
@@ -16,26 +17,7 @@ class MyPage extends StatelessWidget {
           height: 250,
           child: Stack(
             children: <Widget>[
-              Container(
-                padding: EdgeInsets.only(
-                  left: 25,
-                  top: 30,
-                ),
-                height: 180,
-                decoration: BoxDecoration(
-                  color: AppColors.headingColor1,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(36),
-                    bottomRight: Radius.circular(36),
-                  ),
-                ),
-                child: Row(
-                  children: <Widget>[
-                    AppLargeText(
-                        text: 'Profile', color: Colors.white, size: 36),
-                  ],
-                ),
-              ),
+              CommonHeader(title: 'Profile'),
               Positioned(
                 top: 130,
                 left: MediaQuery.of(context).size.width / 3,

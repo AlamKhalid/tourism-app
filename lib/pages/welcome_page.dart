@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:tourism_app/pages/home_page.dart';
 import 'package:tourism_app/widgets/welcome_widget.dart';
-import '../widgets/responsive_button.dart';
+import '../widgets/common/responsive_button.dart';
 import '../misc/colors.dart';
-import '../widgets/app_large_text.dart';
-import '../widgets/app_text.dart';
+import '../widgets/common/app_large_text.dart';
+import '../widgets/common/app_text.dart';
 import './navpages/main_page.dart';
+import '../size_config.dart';
 
 class WelcomePage extends StatefulWidget {
+  static const routeName = '/welcome-page';
   const WelcomePage({Key? key}) : super(key: key);
 
   @override
@@ -37,6 +39,7 @@ class _WelcomePageState extends State<WelcomePage> {
   ];
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       body: PageView.builder(
         scrollDirection: Axis.vertical,

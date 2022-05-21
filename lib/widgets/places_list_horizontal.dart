@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tourism_app/misc/colors.dart';
-import 'package:tourism_app/widgets/app_buttons.dart';
-import 'package:tourism_app/widgets/app_large_text.dart';
+import 'package:tourism_app/widgets/common/app_buttons.dart';
+import 'package:tourism_app/widgets/common/app_large_text.dart';
 import '../pages/detail_pages.dart';
 
 class PlacesListHorizontal extends StatelessWidget {
