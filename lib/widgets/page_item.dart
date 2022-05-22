@@ -39,22 +39,13 @@ class PageItem extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: Color.fromARGB(255, 247, 246, 246),
-              // boxShadow: [
-              //   BoxShadow(
-              //     color: Color(0xFFe8e8e8),
-              //     blurRadius: 5.0,
-              //     offset: Offset(0, 5),
-              //   ),
-              //   BoxShadow(color: Colors.white, offset: Offset(-5, 0)),
-              //   BoxShadow(color: Colors.white, offset: Offset(5, 0))
-              // ]
             ),
             child: Container(
               padding: EdgeInsets.only(top: 15, left: 15, right: 15),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AppLargeText(text: place.name),
+                    FittedBox(child: AppLargeText(text: place.name)),
                     SizedBox(
                       height: 10,
                     ),

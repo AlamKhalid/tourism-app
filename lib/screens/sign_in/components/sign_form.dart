@@ -3,6 +3,7 @@ import 'package:tourism_app/misc/colors.dart';
 import 'package:tourism_app/pages/navpages/main_page.dart';
 import 'package:tourism_app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:tourism_app/screens/login_success/login_success_screen.dart';
+import 'package:tourism_app/services/userService.dart';
 import '../../../components/custom_surfix_icon.dart';
 import '../../../components/default_button.dart';
 import '../../../components/form_error.dart';
@@ -80,10 +81,12 @@ class _SignFormState extends State<SignForm> {
           SizedBox(height: 40),
           DefaultButton(
             text: "Login",
-            press: () {
-              Navigator.of(context).popUntil((route) => route.isFirst);
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => LoginSuccessScreen()));
+            press: () async {
+              var response = await login(email, password);
+              print(response);
+              // Navigator.of(context).popUntil((route) => route.isFirst);
+              // Navigator.of(context).pushReplacement(MaterialPageRoute(
+              //     builder: (context) => LoginSuccessScreen()));
             },
           ),
 

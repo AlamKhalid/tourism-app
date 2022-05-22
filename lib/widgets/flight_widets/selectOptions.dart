@@ -39,17 +39,28 @@ class _SelectOptionsState extends State<SelectOptions> {
     });
   }
 
+  String? dateValidator() {
+    if (_dateTime == null) {
+      return "Enter a date";
+    }
+  }
+
   void submitForm(ctx) {
-    Navigator.push(
-      ctx,
-      MaterialPageRoute(builder: (context) {
-        return Ticketpage(
-            to: to,
-            from: from,
-            adults: _adultsController.text,
-            date: _dateTime);
-      }),
-    );
+    if (_form.currentState!.validate()) {
+      Navigator.push(
+        ctx,
+        MaterialPageRoute(builder: (context) {
+          return Ticketpage(
+              to: to,
+              from: from,
+              adults: _adultsController.text,
+              date: _dateTime);
+        }),
+      );
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('There is some error')));
+    }
   }
 
   @override
@@ -110,7 +121,8 @@ class _SelectOptionsState extends State<SelectOptions> {
                   width: 10,
                 ),
                 Expanded(
-                    child: TextField(
+                    child: TextFormField(
+                  validator: (_) => dateValidator(),
                   keyboardType: TextInputType.none,
                   onTap: () {
                     _showDatePicker();
@@ -122,7 +134,6 @@ class _SelectOptionsState extends State<SelectOptions> {
                     filled: true,
                     hintStyle: TextStyle(color: Colors.grey[800], fontSize: 16),
                     hintText: _dateTime == null ? 'Date' : _dateTime.toString(),
-                    //labelText: _dateTime.toString(),
                     fillColor: Colors.white70,
                     suffixIcon: IconButton(
                       onPressed: () => _showDatePicker(),

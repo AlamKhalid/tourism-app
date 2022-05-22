@@ -3,8 +3,10 @@ import 'package:http/http.dart' as http;
 import 'package:tourism_app/models/city.dart';
 
 Future<String> login(email, password) async {
-  final response = await http
-      .get(Uri.parse('https://tourip-backend.herokuapp.com/api/auth'));
+  final response = await http.post(
+      Uri.parse('https://tourip-backend.herokuapp.com/api/auth'),
+      headers: <String, String>{'Accept': 'application/json'},
+      body: jsonEncode({'email': email, 'password': password}));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -15,6 +17,7 @@ Future<String> login(email, password) async {
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.
+    print(jsonDecode(response.body));
     throw Exception('Failed to login');
   }
 }

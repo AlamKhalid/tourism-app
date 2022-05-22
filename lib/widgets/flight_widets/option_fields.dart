@@ -60,6 +60,11 @@ class _OptionFieldsState extends State<OptionFields> {
       onChanged: (String? val) {
         widget.setFunction(val);
       },
+      validator: (String? value) {
+        if (value!.isEmpty) {
+          return 'Please enter some text';
+        }
+      },
       items: cityList
           .map((city) => DropdownMenuItem(
               value: city['value'], child: Text(city['name']!)))

@@ -5,7 +5,6 @@ import 'package:tourism_app/models/city.dart';
 import 'package:tourism_app/pages/navpages/agencies.dart';
 import '../../services/cityService.dart';
 import '../landing_page.dart';
-import './bar_item.dart';
 import './my_page.dart';
 import './flights_page.dart';
 
