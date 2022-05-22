@@ -44,7 +44,7 @@ class TopPlaces extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          ListPlaces(places: places),
+          ListPlaces(places: places, city: city),
           SizedBox(
             height: 10,
           ),

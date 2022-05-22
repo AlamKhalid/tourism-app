@@ -3,11 +3,14 @@ import 'package:tourism_app/widgets/common/app_buttons.dart';
 import 'package:tourism_app/widgets/common/app_text.dart';
 import 'package:tourism_app/widgets/common/responsive_button.dart';
 import '../misc/colors.dart';
+import '../models/place.dart';
 import '../widgets/common/app_large_text.dart';
 
 class DetailPage extends StatefulWidget {
-  const DetailPage({Key? key}) : super(key: key);
-
+  const DetailPage({Key? key, required this.place, required this.city})
+      : super(key: key);
+  final Place place;
+  final String city;
   @override
   State<DetailPage> createState() => _DetailPageState();
 }
@@ -32,7 +35,7 @@ class _DetailPageState extends State<DetailPage> {
                 height: 350,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage('assets/images/mountain.jpeg'),
+                    image: NetworkImage(widget.place.images[0]),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -40,12 +43,14 @@ class _DetailPageState extends State<DetailPage> {
             ),
             Positioned(
               top: 50,
-              left: 20,
+              left: 10,
               child: Row(
                 children: [
                   IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.menu),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: const Icon(Icons.arrow_back_ios_new),
                     color: Colors.white,
                   ),
                 ],
@@ -67,33 +72,38 @@ class _DetailPageState extends State<DetailPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        AppLargeText(
-                          text: 'Yosemite',
-                          color: Colors.black.withOpacity(
-                            0.8,
-                          ),
-                        ),
-                        AppLargeText(text: '\$ 250', color: AppColors.mainColor)
-                      ],
-                    ),
+                    AppLargeText(
+                        text: widget.place.name, color: AppColors.textColor1),
                     const SizedBox(
                       height: 10,
                     ),
                     Row(
                       children: [
                         Icon(
-                          Icons.location_on,
-                          color: AppColors.mainColor,
+                          Icons.access_alarm_outlined,
+                          color: AppColors.bigTextColor,
                         ),
                         const SizedBox(
                           width: 5,
                         ),
-                        AppText(
-                            text: 'USA California',
-                            color: AppColors.textColor1),
+                        AppText(text: '2h 30m', color: AppColors.bigTextColor),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Icon(
+                          Icons.location_on,
+                          color: AppColors.bigTextColor,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Row(children: [
+                          AppText(
+                              text: '${widget.city}, ',
+                              color: AppColors.bigTextColor),
+                          AppText(
+                              text: 'Pakistan', color: AppColors.bigTextColor),
+                        ]),
                       ],
                     ),
                     const SizedBox(
@@ -108,73 +118,38 @@ class _DetailPageState extends State<DetailPage> {
                               Icons.star,
                               color: index < gottenStars
                                   ? AppColors.starColor
-                                  : AppColors.textColor2,
+                                  : AppColors.textColor5,
                             ),
                           ),
                         ),
                         const SizedBox(
                           width: 10,
                         ),
-                        AppText(text: '(4.0)', color: AppColors.textColor2),
+                        AppText(text: '(3.0)', color: AppColors.textColor1),
                       ],
                     ),
                     const SizedBox(
                       height: 25,
                     ),
-                    AppLargeText(
-                      text: 'People',
-                      color: Colors.black.withOpacity(0.8),
-                      size: 20,
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    AppText(
-                      text: 'Number of people in your group',
-                      color: AppColors.mainTextColor,
-                    ),
-                    const SizedBox(height: 10),
-                    Wrap(
-                      children: List.generate(
-                        5,
-                        (index) => InkWell(
-                          onTap: () {
-                            setState(() {
-                              selectedIndex = index;
-                            });
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.only(right: 10),
-                            child: AppButtons(
-                                color: selectedIndex == index
-                                    ? Colors.white
-                                    : Colors.black,
-                                size: 50,
-                                backgroundColor: selectedIndex == index
-                                    ? Colors.black
-                                    : AppColors.buttonBackground,
-                                borderColor: selectedIndex == index
-                                    ? Colors.black
-                                    : AppColors.buttonBackground,
-                                text: (index + 1).toString()),
-                          ),
-                        ),
-                      ),
-                    ),
                     const SizedBox(
                       height: 20,
                     ),
-                    AppLargeText(
-                        text: 'Description',
-                        color: Colors.black.withOpacity(0.8),
-                        size: 22),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    AppText(
-                      text:
-                          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been',
-                      color: AppColors.mainTextColor,
+                    SingleChildScrollView(
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AppLargeText(
+                                text: 'Description',
+                                color: Colors.black.withOpacity(0.8),
+                                size: 22),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            AppText(
+                              text: widget.place.description,
+                              color: Colors.grey,
+                            ),
+                          ]),
                     ),
                   ],
                 ),
@@ -187,9 +162,9 @@ class _DetailPageState extends State<DetailPage> {
                 child: Row(
                   children: [
                     AppButtons(
-                      color: AppColors.textColor1,
+                      color: AppColors.headingColor1,
                       backgroundColor: Colors.white,
-                      borderColor: AppColors.textColor1,
+                      borderColor: AppColors.headingColor1,
                       size: 60,
                       isIcon: true,
                       icon: Icons.favorite,

@@ -16,8 +16,11 @@ class PlacesListHorizontal extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: 3,
         itemBuilder: (context, index) => GestureDetector(
-          onTap: () => Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => DetailPage())),
+          // onTap: () => Navigator.of(context).push(MaterialPageRoute(
+          //     builder: (context) => DetailPage(
+          //           name: 'Nice',
+
+          //         ))),
           child: Container(
             width: 250,
             height: 400,

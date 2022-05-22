@@ -4,7 +4,9 @@ import 'package:tourism_app/widgets/page_item.dart';
 
 class ListPlaces extends StatefulWidget {
   final List<Place> places;
-  ListPlaces({Key? key, required this.places}) : super(key: key);
+  final String city;
+  ListPlaces({Key? key, required this.places, required this.city})
+      : super(key: key);
 
   @override
   State<ListPlaces> createState() => _ListPlacesState();
@@ -67,6 +69,7 @@ class _ListPlacesState extends State<ListPlaces> {
               return PageItem(
                   place: widget.places[position],
                   index: position,
+                  city: widget.city,
                   matrix: transformation(position));
             }));
   }

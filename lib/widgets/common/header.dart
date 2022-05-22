@@ -66,21 +66,22 @@ class Header extends StatelessWidget {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
-                      onChanged: (value) {},
                       decoration: InputDecoration(
-                        hintText: "Search Places",
-                        hintStyle: TextStyle(
-                          color: AppColors.textColor1,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(vertical: 15),
-                        suffixIcon: Icon(
-                          Icons.search,
-                          color: AppColors.textColor1,
-                        ),
-                      ),
+                          hintText: "Search Places",
+                          hintStyle: TextStyle(
+                            color: AppColors.textColor1,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(vertical: 15),
+                          suffixIcon: IconButton(
+                            icon: Icon(Icons.search),
+                            onPressed: () {},
+                          )),
+                      onSubmitted: (value) {
+                        print(value);
+                      },
                     ),
                   ),
                 ],

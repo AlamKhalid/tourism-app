@@ -20,19 +20,26 @@ class ResponsiveButton extends StatelessWidget {
         height: 60,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: AppColors.mainColor,
+          color: AppColors.headingColor1,
         ),
-        child: Row(
-          mainAxisAlignment: isResponsive
-              ? MainAxisAlignment.spaceBetween
-              : MainAxisAlignment.center,
-          children: [
-            if (isResponsive)
-              Container(
-                  margin: const EdgeInsets.only(left: 20),
-                  child: AppText(text: 'Book trip now', color: Colors.white)),
-            Image.asset('assets/images/button-one.png'),
-          ],
+        child: Container(
+          child: Row(
+            mainAxisAlignment: isResponsive
+                ? MainAxisAlignment.spaceEvenly
+                : MainAxisAlignment.center,
+            children: [
+              if (isResponsive)
+                Container(
+                    margin: const EdgeInsets.only(left: 20),
+                    child:
+                        AppText(text: 'Mark as Visited', color: Colors.white)),
+              Icon(
+                Icons.check,
+                color: Colors.white,
+                size: 25,
+              ),
+            ],
+          ),
         ),
       ),
     );
