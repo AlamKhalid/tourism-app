@@ -21,6 +21,7 @@ class SignForm extends StatefulWidget {
 
 class _SignFormState extends State<SignForm> {
   final _formKey = GlobalKey<FormState>();
+  bool loggingIn = false;
   String? email;
   String? password;
   String? conform_password;
@@ -50,9 +51,9 @@ class _SignFormState extends State<SignForm> {
           buildEmailFormField(),
           SizedBox(height: 20),
           buildPasswordFormField(),
+          SizedBox(height: getProportionateScreenHeight(15)),
+          FormError(errors: errors),
           SizedBox(height: getProportionateScreenHeight(10)),
-          // FormError(errors: errors),
-          // SizedBox(height: getProportionateScreenHeight(10)),
           Row(
             children: [
               Checkbox(
@@ -78,18 +79,29 @@ class _SignFormState extends State<SignForm> {
               )
             ],
           ),
-          SizedBox(height: 40),
+          SizedBox(height: 30),
           DefaultButton(
-            text: "Login",
+            text: loggingIn ? "Logging In..." : "Login",
             press: () async {
-              var response = await login(email, password);
-              print(response);
-              // Navigator.of(context).popUntil((route) => route.isFirst);
-              // Navigator.of(context).pushReplacement(MaterialPageRoute(
-              //     builder: (context) => LoginSuccessScreen()));
+              if (_formKey.currentState!.validate()) {
+                setState(() {
+                  loggingIn = true;
+                });
+                var response = await login(email, password);
+                setState(() {
+                  loggingIn = false;
+                });
+                if (response == "success") {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => LoginSuccessScreen()));
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Invalid Email or Password')));
+                }
+              }
             },
           ),
-
           SizedBox(height: 10),
           DefaultButton(
               text: "Continue as Guest",
@@ -111,7 +123,7 @@ class _SignFormState extends State<SignForm> {
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kPassNullError);
-        } else if (value.length >= 8) {
+        } else if (value.length >= 6) {
           removeError(error: kShortPassError);
         }
         password = value;
@@ -120,13 +132,14 @@ class _SignFormState extends State<SignForm> {
         if (value!.isEmpty) {
           addError(error: kPassNullError);
           return "";
-        } else if (value.length < 8) {
+        } else if (value.length < 6) {
           addError(error: kShortPassError);
           return "";
         }
         return null;
       },
       decoration: InputDecoration(
+        errorStyle: TextStyle(height: 0),
         labelText: '  Password ',
         hintText: "Enter your Password",
         suffixIcon: Icon(Icons.lock),
@@ -158,7 +171,7 @@ class _SignFormState extends State<SignForm> {
         } else if (emailValidatorRegExp.hasMatch(value)) {
           removeError(error: kInvalidEmailError);
         }
-        return null;
+        email = value;
       },
       validator: (value) {
         if (value!.isEmpty) {
@@ -171,6 +184,7 @@ class _SignFormState extends State<SignForm> {
         return null;
       },
       decoration: InputDecoration(
+        errorStyle: TextStyle(height: 0),
         labelText: '  Email ',
         hintText: "Enter your Name",
         suffixIcon: Icon(Icons.email),
