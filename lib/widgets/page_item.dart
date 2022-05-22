@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tourism_app/models/place.dart';
 import '../misc/colors.dart';
 import 'common/app_large_text.dart';
 import 'common/app_text.dart';
@@ -7,24 +8,29 @@ import 'icon_and_text.dart';
 class PageItem extends StatelessWidget {
   Matrix4? matrix;
   int index;
-  PageItem({Key? key, required this.index, required this.matrix})
+  Place place;
+  PageItem(
+      {Key? key,
+      required this.index,
+      required this.matrix,
+      required this.place})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // print(place['data']['image']['photo']['photoSizes'][0]['url']);
     return Transform(
       transform: matrix!,
       child: Stack(children: [
         Container(
-          height: 220,
-          margin: EdgeInsets.only(left: 0, right: 20),
-          decoration: BoxDecoration(
+            height: 220,
+            margin: EdgeInsets.only(left: 0, right: 20),
+            decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
               color: Color(0xFF69c5df),
               image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage('assets/images/mountain.jpeg'))),
-        ),
+                  fit: BoxFit.cover, image: NetworkImage(place.images[0])),
+            )),
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
@@ -48,7 +54,7 @@ class PageItem extends StatelessWidget {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AppLargeText(text: 'Chinese Side'),
+                    AppLargeText(text: place.name),
                     SizedBox(
                       height: 10,
                     ),

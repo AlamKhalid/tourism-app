@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tourism_app/misc/colors.dart';
+import 'package:tourism_app/models/place.dart';
 import 'package:tourism_app/widgets/common/app_large_text.dart';
 import 'package:tourism_app/widgets/common/app_text.dart';
 import 'package:tourism_app/widgets/more_button.dart';
@@ -8,7 +9,9 @@ import 'package:tourism_app/widgets/places_list_new.dart';
 
 class TopPlaces extends StatelessWidget {
   final String city;
-  const TopPlaces({Key? key, required this.city}) : super(key: key);
+  final List<Place> places;
+  const TopPlaces({Key? key, required this.city, required this.places})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +44,7 @@ class TopPlaces extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          ListPlaces(),
+          ListPlaces(places: places),
           SizedBox(
             height: 10,
           ),

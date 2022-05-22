@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tourism_app/misc/colors.dart';
+import 'package:tourism_app/models/city.dart';
 import 'package:tourism_app/pages/detail_pages.dart';
 import 'package:tourism_app/widgets/common/app_large_text.dart';
 import 'package:tourism_app/widgets/common/app_text.dart';
 import 'package:tourism_app/widgets/common/header.dart';
 import 'package:tourism_app/widgets/list_places_vertical.dart';
 
+import '../provider/city.dart';
+import '../widgets/list_hotels_vertical.dart';
+import '../widgets/list_restaurants_vertical.dart';
 import '../widgets/places_list_horizontal.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,6 +36,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     bool keyboardIsOpen = MediaQuery.of(context).viewInsets.bottom != 0;
     var chipNames = ['Places', 'Hotels', 'Restaurants'];
     TabController _tabController = TabController(length: 3, vsync: this);
+    City city = context
+        .watch<CityNotifier>()
+        .cities
+        .firstWhere((element) => element.name == widget.city);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -84,9 +93,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               child: TabBarView(
                 controller: _tabController,
                 children: [
-                  ListPlacesVertical(),
-                  Text('There'),
-                  Text('Bye'),
+                  ListPlacesVertical(places: city.places),
+                  ListHotelsVertical(
+                    hotels: city.hotels,
+                  ),
+                  ListRestaurantsVertical(
+                    restaurants: city.restaurants,
+                  ),
                 ],
               ),
             ),

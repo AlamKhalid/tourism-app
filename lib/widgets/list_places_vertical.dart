@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:tourism_app/models/place.dart';
 import 'package:tourism_app/widgets/icon_and_text.dart';
 
 import '../misc/colors.dart';
 
 class ListPlacesVertical extends StatelessWidget {
-  const ListPlacesVertical({Key? key}) : super(key: key);
+  final List<Place> places;
+  const ListPlacesVertical({Key? key, required this.places}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        padding: EdgeInsets.only(top: 10),
+        padding: EdgeInsets.only(
+          top: 10,
+          bottom: 25,
+        ),
         shrinkWrap: true,
         physics: AlwaysScrollableScrollPhysics(),
-        itemCount: 10,
+        itemCount: places.length,
         itemBuilder: (context, index) {
           return Container(
               margin: EdgeInsets.only(left: 0, right: 20, bottom: 20),
@@ -26,7 +31,7 @@ class ListPlacesVertical extends StatelessWidget {
                         color: Color.fromARGB(255, 247, 246, 246),
                         image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: AssetImage('assets/images/mountain.jpeg'))),
+                            image: NetworkImage(places[index].images[0]))),
                   ),
                   Expanded(
                     child: Container(
@@ -44,12 +49,12 @@ class ListPlacesVertical extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Nutitious Food',
+                              places[index].name,
                               style: TextStyle(fontSize: 16),
                             ),
                             SizedBox(height: 5),
                             Text(
-                              'Just dummy text of description',
+                              "${places[index].description.substring(0, 48)}...",
                               style:
                                   TextStyle(fontSize: 15, color: Colors.grey),
                             ),

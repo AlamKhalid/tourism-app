@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../option_fields.dart';
+import './option_fields.dart';
 
 class SelectOptions extends StatefulWidget {
   @override

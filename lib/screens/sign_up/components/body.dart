@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:tourism_app/misc/colors.dart';
 import 'package:tourism_app/widgets/common/common_header.dart';
 import 'package:tourism_app/widgets/common/header.dart';
 import '../../../components/socal_card.dart';
 import '../../../constants.dart';
 import '../../../size_config.dart';
 
+import '../../sign_in/sign_in_screen.dart';
+import '../sign_up_screen.dart';
 import 'sign_up_form.dart';
 
 class Body extends StatelessWidget {
@@ -32,7 +35,7 @@ class Body extends StatelessWidget {
                   ),
                   SizedBox(height: SizeConfig.screenHeight * 0.08),
                   SignUpForm(),
-                  SizedBox(height: SizeConfig.screenHeight * 0.08),
+                  SizedBox(height: SizeConfig.screenHeight * 0.03),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -51,11 +54,26 @@ class Body extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: getProportionateScreenHeight(20)),
-                  Text(
-                    'By continuing your confirm that you agree \nwith our Term and Condition',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.caption,
-                  )
+
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Text(
+                      'Aleady Have an account?',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    SizedBox(width: 10),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => SignInScreen()));
+                      },
+                      child: Text(
+                        'LogIn',
+                        style: TextStyle(
+                            color: AppColors.headingColor1, fontSize: 20),
+                      ),
+                    ),
+                  ])
                 ],
               ),
             ),

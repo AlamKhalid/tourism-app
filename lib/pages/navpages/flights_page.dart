@@ -14,6 +14,9 @@ class FlightsPage extends StatefulWidget {
 }
 
 class _FlightsPageState extends State<FlightsPage> {
+  String? from, to, adults;
+  DateTime? pickedDate;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +33,7 @@ class _FlightsPageState extends State<FlightsPage> {
             SizedBox(height: 25),
             SelectOptions(),
             SizedBox(height: 16),
-            FlightsButton(label: 'Look for Flights')
+            FlightsButton(label: 'Search for Flights')
           ],
         ),
       ),

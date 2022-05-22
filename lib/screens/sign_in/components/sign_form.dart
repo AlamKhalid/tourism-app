@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:tourism_app/screens/forgot_password/forgot_password_screen.dart';
+import 'package:tourism_app/screens/login_success/login_success_screen.dart';
 import '../../../components/custom_surfix_icon.dart';
-import '../../../components/form_error.dart';
-import '../../../helper/keyboard.dart';
-import '../../forgot_password/forgot_password_screen.dart';
-import '../../login_success/login_success_screen.dart';
-
 import '../../../components/default_button.dart';
+import '../../../components/form_error.dart';
+import '../../complete_profile/complete_profile_screen.dart';
+
 import '../../../constants.dart';
 import '../../../size_config.dart';
+import '../../sign_up/sign_up_screen.dart';
+import '../sign_in_screen.dart';
 
 class SignForm extends StatefulWidget {
   @override
@@ -18,7 +20,8 @@ class _SignFormState extends State<SignForm> {
   final _formKey = GlobalKey<FormState>();
   String? email;
   String? password;
-  bool? remember = false;
+  String? conform_password;
+  bool remember = false;
   final List<String?> errors = [];
 
   void addError({String? error}) {
@@ -42,9 +45,11 @@ class _SignFormState extends State<SignForm> {
       child: Column(
         children: [
           buildEmailFormField(),
-          SizedBox(height: getProportionateScreenHeight(30)),
+          SizedBox(height: 20),
           buildPasswordFormField(),
-          SizedBox(height: getProportionateScreenHeight(30)),
+          SizedBox(height: getProportionateScreenHeight(10)),
+          // FormError(errors: errors),
+          // SizedBox(height: getProportionateScreenHeight(10)),
           Row(
             children: [
               Checkbox(
@@ -52,15 +57,17 @@ class _SignFormState extends State<SignForm> {
                 activeColor: kPrimaryColor,
                 onChanged: (value) {
                   setState(() {
-                    remember = value;
+                    remember = value!;
                   });
                 },
               ),
               Text("Remember me"),
               Spacer(),
               GestureDetector(
-                onTap: () => Navigator.pushNamed(
-                    context, ForgotPasswordScreen.routeName),
+                onTap: () => {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => ForgotPasswordScreen()))
+                },
                 child: Text(
                   "Forgot Password",
                   style: TextStyle(decoration: TextDecoration.underline),
@@ -68,17 +75,12 @@ class _SignFormState extends State<SignForm> {
               )
             ],
           ),
-          FormError(errors: errors),
-          SizedBox(height: getProportionateScreenHeight(20)),
+          SizedBox(height: 20),
           DefaultButton(
-            text: "Continue",
+            text: "Login",
             press: () {
-              if (_formKey.currentState!.validate()) {
-                _formKey.currentState!.save();
-                // if all are valid then go to success screen
-                KeyboardUtil.hideKeyboard(context);
-                Navigator.pushNamed(context, LoginSuccessScreen.routeName);
-              }
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => LoginSuccessScreen()));
             },
           ),
         ],
@@ -96,7 +98,7 @@ class _SignFormState extends State<SignForm> {
         } else if (value.length >= 8) {
           removeError(error: kShortPassError);
         }
-        return null;
+        password = value;
       },
       validator: (value) {
         if (value!.isEmpty) {
@@ -109,12 +111,23 @@ class _SignFormState extends State<SignForm> {
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Password",
-        hintText: "Enter your password",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
+        labelText: '  Password ',
+        hintText: "Enter your Password",
+        suffixIcon: Icon(Icons.lock),
+        contentPadding: const EdgeInsets.only(left: 30),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(color: Colors.grey, width: 2),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(color: kPrimaryColor, width: 1.5),
+        ),
+        focusedBorder: OutlineInputBorder(
+          gapPadding: 0.0,
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(color: kPrimaryColor, width: 1.5),
+        ),
       ),
     );
   }
@@ -142,12 +155,23 @@ class _SignFormState extends State<SignForm> {
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Email",
-        hintText: "Enter your email",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
+        labelText: '  Email ',
+        hintText: "Enter your Name",
+        suffixIcon: Icon(Icons.email),
+        contentPadding: const EdgeInsets.only(left: 30),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(color: Colors.grey, width: 2),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(color: kPrimaryColor, width: 1.5),
+        ),
+        focusedBorder: OutlineInputBorder(
+          gapPadding: 0.0,
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(color: kPrimaryColor, width: 1.5),
+        ),
       ),
     );
   }

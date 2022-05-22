@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tourism_app/models/place.dart';
 import 'package:tourism_app/widgets/page_item.dart';
 
 class ListPlaces extends StatefulWidget {
-  ListPlaces({Key? key}) : super(key: key);
+  final List<Place> places;
+  ListPlaces({Key? key, required this.places}) : super(key: key);
 
   @override
   State<ListPlaces> createState() => _ListPlacesState();
@@ -60,10 +62,12 @@ class _ListPlacesState extends State<ListPlaces> {
         height: 320,
         child: PageView.builder(
             controller: pageController,
-            itemCount: 5,
+            itemCount: widget.places.length,
             itemBuilder: (context, position) {
               return PageItem(
-                  index: position, matrix: transformation(position));
+                  place: widget.places[position],
+                  index: position,
+                  matrix: transformation(position));
             }));
   }
 }

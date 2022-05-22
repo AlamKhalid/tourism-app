@@ -1,4 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:tourism_app/misc/colors.dart';
+import 'package:tourism_app/models/city.dart';
+import '../../services/cityService.dart';
 import '../landing_page.dart';
 import './bar_item.dart';
 import './my_page.dart';
@@ -39,8 +43,8 @@ class _MainPageState extends State<MainPage> {
         type: BottomNavigationBarType.fixed,
         onTap: onTap,
         currentIndex: currentIndex,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey.withOpacity(0.5),
+        selectedItemColor: AppColors.headingColor1,
+        unselectedItemColor: Colors.grey.withOpacity(0.6),
         showSelectedLabels: false,
         showUnselectedLabels: false,
         elevation: 0,
