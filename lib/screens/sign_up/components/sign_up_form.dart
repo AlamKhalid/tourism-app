@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tourism_app/pages/navpages/main_page.dart';
 import 'package:tourism_app/screens/forgot_password/forgot_password_screen.dart';
+import 'package:tourism_app/services/userService.dart';
 import '../../../components/custom_surfix_icon.dart';
 import '../../../components/default_button.dart';
 import '../../../components/form_error.dart';
@@ -23,6 +24,8 @@ class _SignUpFormState extends State<SignUpForm> {
   String? password;
   String? conform_password;
   bool remember = false;
+  bool loggingIn = false;
+
   final List<String?> errors = [];
 
   void addError({String? error}) {
@@ -53,11 +56,25 @@ class _SignUpFormState extends State<SignUpForm> {
           FormError(errors: errors),
           SizedBox(height: getProportionateScreenHeight(40)),
           DefaultButton(
-            text: "Signup",
-            press: () {
-              Navigator.of(context).popUntil((route) => route.isFirst);
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => MainPage()));
+            text: loggingIn ? "Signing Up..." : "Signup",
+            press: () async {
+              if (_formKey.currentState!.validate()) {
+                setState(() {
+                  loggingIn = true;
+                });
+                var response = await register(email, password);
+                setState(() {
+                  loggingIn = false;
+                });
+                if (response == "success") {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => MainPage()));
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Invalid Email or Password')));
+                }
+              }
             },
           ),
           SizedBox(height: 10),
@@ -172,7 +189,7 @@ class _SignUpFormState extends State<SignUpForm> {
         } else if (emailValidatorRegExp.hasMatch(value)) {
           removeError(error: kInvalidEmailError);
         }
-        return null;
+        email = value;
       },
       validator: (value) {
         if (value!.isEmpty) {
