@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tourism_app/misc/colors.dart';
 import 'package:tourism_app/pages/navpages/main_page.dart';
 import 'package:tourism_app/screens/forgot_password/forgot_password_screen.dart';
@@ -8,7 +9,7 @@ import '../../../components/custom_surfix_icon.dart';
 import '../../../components/default_button.dart';
 import '../../../components/form_error.dart';
 import '../../complete_profile/complete_profile_screen.dart';
-
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../../../constants.dart';
 import '../../../size_config.dart';
 import '../../sign_up/sign_up_screen.dart';
@@ -92,6 +93,9 @@ class _SignFormState extends State<SignForm> {
                   loggingIn = false;
                 });
                 if (response == "success") {
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  prefs.setString('email', 'useremail@gmail.com');
                   Navigator.of(context).popUntil((route) => route.isFirst);
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (context) => LoginSuccessScreen()));
@@ -107,6 +111,10 @@ class _SignFormState extends State<SignForm> {
               text: "Continue as Guest",
               color: AppColors.textColor4,
               press: () {
+                SpinKitRotatingCircle(
+                  color: Colors.white,
+                  size: 50.0,
+                );
                 Navigator.of(context).popUntil((route) => route.isFirst);
                 Navigator.of(context).pushReplacement(
                     MaterialPageRoute(builder: (context) => MainPage()));

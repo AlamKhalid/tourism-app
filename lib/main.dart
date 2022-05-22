@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tourism_app/pages/landing_page.dart';
 import 'package:tourism_app/provider/city.dart';
 import 'package:tourism_app/screens/sign_in/sign_in_screen.dart';
 import 'package:tourism_app/screens/sign_up/sign_up_screen.dart';
@@ -7,11 +8,20 @@ import './pages/detail_pages.dart';
 import './pages/navpages/main_page.dart';
 import './pages/welcome_page.dart';
 import './size_config.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 
 import 'misc/pallette.dart';
 
-void main() {
+int? initScreen;
+String? email = null;
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  initScreen = await prefs.getInt("initScreen");
+  email = prefs.getString('email');
+  await prefs.setInt("initScreen", 1);
+  print('initScreen ${initScreen}');
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => CityNotifier()),
   ], child: MyApp()));
@@ -29,10 +39,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primarySwatch: Palette.kToDark),
       routes: {
         SignUpScreen.routeName: (context) => SignUpScreen(),
-        SignUpScreen.routeName: (context) => SignInScreen(),
+        SignInScreen.routeName: (context) => SignInScreen(),
         WelcomePage.routeName: (context) => SplashScreen(),
+        LandingPage.routeName: (context) => LandingPage(),
+        '/': (context) => SplashScreen(),
       },
-      initialRoute: WelcomePage.routeName,
+      initialRoute: initScreen == null
+          ? '/'
+          : email == null
+              ? SignInScreen.routeName
+              : LandingPage.routeName,
       // home: WelcomePage(),
     );
   }

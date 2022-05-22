@@ -10,7 +10,7 @@ import '../../services/cityService.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({Key? key}) : super(key: key);
-
+  static String routeName = "/landing_page";
   @override
   State<LandingPage> createState() => _LandingPageState();
 }
@@ -18,7 +18,6 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage> {
   var _searchController = TextEditingController();
   var topCities = ['Islamabad', 'Lahore', 'Karachi'];
-
   @override
   Widget build(BuildContext context) {
     var cities = context.watch<CityNotifier>().cities;

@@ -34,7 +34,7 @@ class PageItem extends StatelessWidget {
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            height: 120,
+            height: 100,
             margin: EdgeInsets.only(left: 10, right: 30, bottom: 30),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
@@ -65,22 +65,22 @@ class PageItem extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        IconandTextWidget(
-                          icon: Icons.circle_sharp,
-                          text: 'Normal',
-                          iconColor: AppColors.headingColor1,
-                        ),
-                        SizedBox(width: 30),
-                        IconandTextWidget(
-                          icon: Icons.location_on,
-                          text: '1.7km',
-                          iconColor: AppColors.headingColor1,
-                        )
-                      ],
-                    )
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.start,
+                    //   children: [
+                    //     IconandTextWidget(
+                    //       icon: Icons.circle_sharp,
+                    //       text: 'Normal',
+                    //       iconColor: AppColors.headingColor1,
+                    //     ),
+                    //     SizedBox(width: 30),
+                    //     IconandTextWidget(
+                    //       icon: Icons.location_on,
+                    //       text: '1.7km',
+                    //       iconColor: AppColors.headingColor1,
+                    //     )
+                    //   ],
+                    // )
                   ]),
             ),
           ),

@@ -7,6 +7,7 @@ import 'package:tourism_app/widgets/common/app_large_text.dart';
 import 'package:tourism_app/widgets/common/app_text.dart';
 import 'package:tourism_app/widgets/common/header.dart';
 import 'package:tourism_app/widgets/list_places_vertical.dart';
+import 'package:tourism_app/widgets/timeline.dart';
 
 import '../provider/city.dart';
 import '../widgets/list_hotels_vertical.dart';
@@ -127,7 +128,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 text: 'I T I N E R A T E    M Y    T R I P',
                 size: 16,
                 color: Colors.white),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => TimeLines()));
+            },
           ),
         ),
       ),
