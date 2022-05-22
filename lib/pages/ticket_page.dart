@@ -71,7 +71,9 @@ class _TicketpageState extends State<Ticketpage> {
                       return Text("${snapshot.error}");
                     }
                     // By default show a loading spinner.
-                    return const CircularProgressIndicator();
+                    return Container(
+                        margin: const EdgeInsets.only(top: 250),
+                        child: const CircularProgressIndicator());
                   },
                 ),
               ],
