@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tourism_app/widgets/common/common_header.dart';
 import '../../../pages/detail_pages.dart';
 import 'package:tourism_app/widgets/timeline.dart';
 import '../../../pages/navpages/main_page.dart';
@@ -26,24 +27,26 @@ class _BodyState extends State<Body> {
     },
     {
       'image': 'assets/images/splash_2.png',
-      'title': 'Trip Planner',
+      'title': 'Hotel Finder',
       'desc':
-          'Organizing your trips and tours efficiently with day wise and hourly wise breakdown.'
+          'Finding the best hotels according to your budget for a comfy and smooth journey.'
     },
     {
       'image': 'assets/images/splash_3.png',
-      'title': 'Trip Planner',
+      'title': 'Other Services',
       'desc':
-          'Organizing your trips and tours efficiently with day wise and hourly wise breakdown.'
+          'Assissting with other complimentary features like finding flights, restaurants etc.'
     },
   ];
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SizedBox(
+    return Scaffold(
+      body: Container(
+        height: double.infinity,
         width: double.infinity,
         child: Column(
           children: <Widget>[
+            CommonHeader(title: 'T O U R I P'),
             Expanded(
               flex: 3,
               child: PageView.builder(
@@ -61,7 +64,6 @@ class _BodyState extends State<Body> {
               ),
             ),
             Expanded(
-              flex: 2,
               child: Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: getProportionateScreenWidth(20)),

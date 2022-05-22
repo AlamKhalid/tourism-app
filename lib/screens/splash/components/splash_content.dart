@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tourism_app/misc/colors.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -25,7 +26,7 @@ class SplashContent extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: getProportionateScreenWidth(36),
-              color: kPrimaryColor,
+              color: AppColors.textColor1,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -39,7 +40,7 @@ class SplashContent extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: getProportionateScreenWidth(16),
-                color: Colors.black,
+                color: Color.fromARGB(255, 42, 42, 42),
                 fontWeight: FontWeight.normal,
               ),
             ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../pages/ticket_page.dart';
 import './option_fields.dart';
+import 'flights_button.dart';
 
 class SelectOptions extends StatefulWidget {
   @override
@@ -8,6 +10,9 @@ class SelectOptions extends StatefulWidget {
 }
 
 class _SelectOptionsState extends State<SelectOptions> {
+  var _adultsController = TextEditingController();
+  String? from, to;
+  GlobalKey<FormState> _form = GlobalKey();
   DateTime? _dateTime;
   void _showDatePicker() {
     showDatePicker(
@@ -22,72 +27,115 @@ class _SelectOptionsState extends State<SelectOptions> {
     });
   }
 
+  void setFrom(String? val) {
+    setState(() {
+      from = val;
+    });
+  }
+
+  void setTo(String? val) {
+    setState(() {
+      to = val;
+    });
+  }
+
+  void submitForm(ctx) {
+    Navigator.push(
+      ctx,
+      MaterialPageRoute(builder: (context) {
+        return Ticketpage(
+            to: to,
+            from: from,
+            adults: _adultsController.text,
+            date: _dateTime);
+      }),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(right: 20, left: 20),
-      child: Column(
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              Expanded(
-                  child: OptionFields(
-                hintText: 'Departure',
-                icon: Icon(
-                  Icons.location_city,
-                  color: Colors.red,
-                ),
-              )),
-              SizedBox(
-                width: 10,
-              ),
-              Expanded(
-                  child: OptionFields(
-                hintText: 'Destination',
-                icon: Icon(
-                  Icons.location_city,
-                  color: Colors.red,
-                ),
-              ))
-            ],
-          ),
-          SizedBox(height: 10),
-          Row(
-            children: <Widget>[
-              Expanded(
-                  child: OptionFields(
-                hintText: 'Adults',
-                icon: Icon(
-                  Icons.people,
-                  color: Colors.red,
-                ),
-              )),
-              SizedBox(
-                width: 10,
-              ),
-              Expanded(
-                  child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  filled: true,
-                  hintStyle: TextStyle(color: Colors.grey[800], fontSize: 16),
-                  hintText: _dateTime == null ? 'Date' : _dateTime.toString(),
-                  //labelText: _dateTime.toString(),
-                  fillColor: Colors.white70,
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      _showDatePicker();
-                    },
-                    icon: Icon(Icons.date_range),
+      child: Form(
+        key: _form,
+        child: Column(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Expanded(
+                    child: OptionFields(
+                  setFunction: setFrom,
+                  hintText: 'Departure',
+                  icon: Icon(
+                    Icons.location_city,
                     color: Colors.red,
                   ),
+                )),
+                SizedBox(
+                  width: 10,
                 ),
-              ))
-            ],
-          ),
-        ],
+                Expanded(
+                    child: OptionFields(
+                  setFunction: setTo,
+                  hintText: 'Destination',
+                  icon: Icon(
+                    Icons.location_city,
+                    color: Colors.red,
+                  ),
+                ))
+              ],
+            ),
+            SizedBox(height: 10),
+            Row(
+              children: <Widget>[
+                Expanded(
+                    child: TextFormField(
+                  controller: _adultsController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    suffixIcon: const Icon(
+                      Icons.people,
+                      color: Colors.red,
+                    ),
+                    hintText: 'Adults',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    filled: true,
+                    hintStyle: TextStyle(color: Colors.grey[800], fontSize: 16),
+                    fillColor: Colors.white70,
+                  ),
+                )),
+                SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                    child: TextField(
+                  keyboardType: TextInputType.none,
+                  onTap: () {
+                    _showDatePicker();
+                  },
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    filled: true,
+                    hintStyle: TextStyle(color: Colors.grey[800], fontSize: 16),
+                    hintText: _dateTime == null ? 'Date' : _dateTime.toString(),
+                    //labelText: _dateTime.toString(),
+                    fillColor: Colors.white70,
+                    suffixIcon: IconButton(
+                      onPressed: () => _showDatePicker(),
+                      icon: Icon(Icons.date_range),
+                      color: Colors.red,
+                    ),
+                  ),
+                ))
+              ],
+            ),
+            FlightsButton(label: 'Search for Flights', onPress: submitForm)
+          ],
+        ),
       ),
     );
   }

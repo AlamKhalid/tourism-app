@@ -3,7 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:tourism_app/models/city.dart';
 
 Future<List<City>> fetchCities() async {
-  final response = await http.get(Uri.parse('http://10.0.2.2:4000/api/cities'));
+  final response = await http
+      .get(Uri.parse('https://tourip-backend.herokuapp.com/api/cities'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,

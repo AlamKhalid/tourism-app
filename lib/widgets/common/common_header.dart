@@ -22,21 +22,26 @@ class CommonHeader extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.headingColor1,
         borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(36),
-          bottomRight: Radius.circular(36),
+          bottomLeft: Radius.circular(70),
+          bottomRight: Radius.circular(70),
         ),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment:
+            back ? MainAxisAlignment.start : MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           if (back)
             IconButton(
-              padding: const EdgeInsets.all(0),
+              padding: const EdgeInsets.only(top: 15),
               onPressed: () => Navigator.of(context).pop(),
               color: Colors.white,
               icon: Icon(Icons.arrow_back_ios_new),
             ),
-          AppLargeText(text: title, color: Colors.white, size: 36),
+          Padding(
+            padding: const EdgeInsets.only(top: 15),
+            child: AppLargeText(text: title, color: Colors.white, size: 36),
+          ),
         ],
       ),
     );

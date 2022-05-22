@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tourism_app/misc/colors.dart';
+import 'package:tourism_app/pages/navpages/main_page.dart';
 import 'package:tourism_app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:tourism_app/screens/login_success/login_success_screen.dart';
 import '../../../components/custom_surfix_icon.dart';
@@ -75,14 +77,25 @@ class _SignFormState extends State<SignForm> {
               )
             ],
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 40),
           DefaultButton(
             text: "Login",
             press: () {
-              Navigator.of(context).push(MaterialPageRoute(
+              Navigator.of(context).popUntil((route) => route.isFirst);
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (context) => LoginSuccessScreen()));
             },
           ),
+
+          SizedBox(height: 10),
+          DefaultButton(
+              text: "Continue as Guest",
+              color: AppColors.textColor4,
+              press: () {
+                Navigator.of(context).popUntil((route) => route.isFirst);
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => MainPage()));
+              }),
         ],
       ),
     );

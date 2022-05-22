@@ -4,6 +4,7 @@ import 'package:tourism_app/screens/forgot_password/forgot_password_screen.dart'
 import '../../../components/custom_surfix_icon.dart';
 import '../../../components/default_button.dart';
 import '../../../components/form_error.dart';
+import '../../../misc/colors.dart';
 import '../../complete_profile/complete_profile_screen.dart';
 
 import '../../../constants.dart';
@@ -50,14 +51,24 @@ class _SignUpFormState extends State<SignUpForm> {
           SizedBox(height: getProportionateScreenHeight(20)),
           buildConformPassFormField(),
           FormError(errors: errors),
-          SizedBox(height: getProportionateScreenHeight(30)),
+          SizedBox(height: getProportionateScreenHeight(40)),
           DefaultButton(
-            text: "Continue",
+            text: "Signup",
             press: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => MainPage()));
+              Navigator.of(context).popUntil((route) => route.isFirst);
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => MainPage()));
             },
           ),
+          SizedBox(height: 10),
+          DefaultButton(
+              text: "Continue as Guest",
+              color: AppColors.textColor4,
+              press: () {
+                Navigator.of(context).popUntil((route) => route.isFirst);
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => MainPage()));
+              }),
         ],
       ),
     );

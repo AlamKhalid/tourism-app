@@ -3,16 +3,21 @@ import 'package:flutter/material.dart';
 class OptionFields extends StatefulWidget {
   final String hintText;
   final Icon icon;
+  String? value;
+  Function setFunction;
 
-  OptionFields({Key? key, required this.hintText, required this.icon})
-      : super(key: key);
+  OptionFields({
+    Key? key,
+    required this.hintText,
+    required this.icon,
+    required this.setFunction,
+  }) : super(key: key);
 
   @override
   State<OptionFields> createState() => _OptionFieldsState();
 }
 
 class _OptionFieldsState extends State<OptionFields> {
-  String? dropDownValue;
   List<Map<String, String>> cityList = [
     {"name": "Gwadar", "value": "GWD"},
     {"name": "Peshawar", "value": "PES"},
@@ -50,12 +55,10 @@ class _OptionFieldsState extends State<OptionFields> {
         fillColor: Colors.white70,
       ),
       icon: widget.icon,
-      value: dropDownValue,
+      value: widget.value,
       hint: Text(widget.hintText),
       onChanged: (String? val) {
-        setState(() {
-          dropDownValue = val;
-        });
+        widget.setFunction(val);
       },
       items: cityList
           .map((city) => DropdownMenuItem(

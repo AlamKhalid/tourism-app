@@ -5,21 +5,25 @@ import '../../utilities/themeColors.dart';
 import '../../utilities/themeStyles.dart';
 
 class TicketCard extends StatefulWidget {
-  final int price;
+  final String code;
+  final double price;
   final String destinationCode;
   final String originCode;
   final String arrivalTime;
   final String departureTime;
   final String totalTime;
+  final String date;
   final bool ticketType;
   TicketCard(
       {required this.price,
+      this.code = 'Top',
+      this.date = 'Fr 6 Mar.',
       required this.arrivalTime,
       required this.departureTime,
       required this.destinationCode,
       required this.originCode,
       required this.totalTime,
-      required this.ticketType});
+      this.ticketType = true});
   @override
   _TicketCardState createState() => _TicketCardState();
 }
@@ -54,7 +58,7 @@ class _TicketCardState extends State<TicketCard> {
                       children: <Widget>[
                         Row(
                           children: <Widget>[
-                            Text('\$${widget.price}',
+                            Text('${widget.price.toInt()} PKR',
                                 style: ThemeStyles.ticketPrice)
                           ],
                         ),
@@ -62,8 +66,8 @@ class _TicketCardState extends State<TicketCard> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Text('Fr 6 Mar.', style: ThemeStyles.greyStyle),
-                            Text('Fr 6 Mar.', style: ThemeStyles.greyStyle),
+                            Text(widget.date, style: ThemeStyles.greyStyle),
+                            Text(widget.date, style: ThemeStyles.greyStyle),
                           ],
                         ),
                         SizedBox(height: 10.0),
@@ -91,9 +95,9 @@ class _TicketCardState extends State<TicketCard> {
                           child: Row(
                             children: <Widget>[
                               Icon(Icons.blur_on, color: Colors.grey),
-                              Text('- - - - - - - - - - - - - -'),
+                              Text('- - - - - - - - - - - - - '),
                               Icon(Icons.airplane_ticket, color: Colors.grey),
-                              Text('- - - - - - - - - - - - - -'),
+                              Text('- - - - - - - - - - - - - '),
                               Icon(Icons.blur_on, color: Colors.grey),
                             ],
                           ),
@@ -114,34 +118,23 @@ class _TicketCardState extends State<TicketCard> {
               Align(
                 alignment: Alignment.topRight,
                 child: Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.headingColor1,
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(50.0),
-                        topRight: Radius.circular(50.0)),
-                  ),
-                  height: 70.0,
-                  width: 100.0,
-                  child: widget.ticketType
-                      ? Center(
-                          child: Text(
-                            'Top',
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              color: Colors.white,
-                            ),
-                          ),
-                        )
-                      : Center(
-                          child: Text(
-                            'Med',
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              color: Colors.black,
-                            ),
-                          ),
+                    decoration: BoxDecoration(
+                      color: AppColors.headingColor1,
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(50.0),
+                          topRight: Radius.circular(50.0)),
+                    ),
+                    height: 70.0,
+                    width: 100.0,
+                    child: Center(
+                      child: Text(
+                        widget.code,
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.white,
                         ),
-                ),
+                      ),
+                    )),
               ),
             ],
           ),

@@ -14,27 +14,26 @@ class FlightsPage extends StatefulWidget {
 }
 
 class _FlightsPageState extends State<FlightsPage> {
-  String? from, to, adults;
-  DateTime? pickedDate;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFFf6f5fb),
       body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            CommonHeader(
-              title: 'Flights',
-            ),
-            SizedBox(height: 100),
-            SelectWay(),
-            SizedBox(height: 25),
-            SelectOptions(),
-            SizedBox(height: 16),
-            FlightsButton(label: 'Search for Flights')
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              CommonHeader(
+                title: 'Flights',
+              ),
+              SizedBox(height: 100),
+              SelectWay(),
+              SizedBox(height: 25),
+              SelectOptions(),
+              SizedBox(height: 16),
+              // FlightsButton(label: 'Search for Flights')
+            ],
+          ),
         ),
       ),
     );

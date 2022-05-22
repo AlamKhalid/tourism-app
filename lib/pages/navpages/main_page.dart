@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:tourism_app/misc/colors.dart';
 import 'package:tourism_app/models/city.dart';
+import 'package:tourism_app/pages/navpages/agencies.dart';
 import '../../services/cityService.dart';
 import '../landing_page.dart';
 import './bar_item.dart';
@@ -18,7 +19,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   List pages = [
     LandingPage(),
-    BarItemPage(),
+    AgencyScreen(),
     FlightsPage(),
     MyPage(),
   ];

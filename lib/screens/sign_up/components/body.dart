@@ -36,41 +36,26 @@ class Body extends StatelessWidget {
                   SizedBox(height: SizeConfig.screenHeight * 0.08),
                   SignUpForm(),
                   SizedBox(height: SizeConfig.screenHeight * 0.03),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SocalCard(
-                        icon: "assets/icons/google-icon.svg",
-                        press: () {},
-                      ),
-                      SocalCard(
-                        icon: "assets/icons/facebook-2.svg",
-                        press: () {},
-                      ),
-                      SocalCard(
-                        icon: "assets/icons/twitter.svg",
-                        press: () {},
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: getProportionateScreenHeight(20)),
 
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     Text(
                       'Aleady Have an account?',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 16),
+                      style:
+                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(width: 10),
+                    SizedBox(width: 5),
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => SignInScreen()));
                       },
                       child: Text(
-                        'LogIn',
+                        'Login',
                         style: TextStyle(
-                            color: AppColors.headingColor1, fontSize: 20),
+                            color: AppColors.textColor1,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500),
                       ),
                     ),
                   ])
