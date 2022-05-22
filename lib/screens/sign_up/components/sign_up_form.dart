@@ -114,6 +114,7 @@ class _SignUpFormState extends State<SignUpForm> {
         return null;
       },
       decoration: InputDecoration(
+        errorStyle: TextStyle(height: 0),
         labelText: '  Confirm Pssword ',
         hintText: "Re-enter your password",
         suffixIcon: Icon(Icons.lock),
@@ -158,6 +159,7 @@ class _SignUpFormState extends State<SignUpForm> {
         return null;
       },
       decoration: InputDecoration(
+        errorStyle: TextStyle(height: 0),
         labelText: '  Password ',
         hintText: "Enter your Password",
         suffixIcon: Icon(Icons.lock),
@@ -202,6 +204,7 @@ class _SignUpFormState extends State<SignUpForm> {
         return null;
       },
       decoration: InputDecoration(
+        errorStyle: TextStyle(height: 0),
         labelText: '  Email ',
         hintText: "Enter your Name",
         suffixIcon: Icon(Icons.email),
