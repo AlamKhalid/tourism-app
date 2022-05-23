@@ -1,12 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tourism_app/misc/colors.dart';
+import 'package:tourism_app/services/userService.dart';
 import 'package:tourism_app/widgets/common/app_large_text.dart';
 import 'package:tourism_app/widgets/common/common_header.dart';
 import 'package:tourism_app/widgets/profile_menu.dart';
 import 'package:tourism_app/widgets/profile_pic.dart';
+import 'package:tourism_app/widgets/wishlist.dart';
 
-class MyPage extends StatelessWidget {
-  const MyPage({Key? key}) : super(key: key);
+import '../../models/user.dart';
+import '../../screens/sign_in/sign_in_screen.dart';
+import '../../widgets/visited.dart';
+
+class MyPage extends StatefulWidget {
+  MyPage({Key? key}) : super(key: key);
+
+  @override
+  State<MyPage> createState() => _MyPageState();
+}
+
+class _MyPageState extends State<MyPage> {
+  User? user;
+
+  @override
+  void initState() {
+    getUser();
+  }
+
+  void getUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? email = prefs.getString('email');
+    var u = await fetchUser(email);
+    setState(() {
+      user = u;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +65,30 @@ class MyPage extends StatelessWidget {
               ProfileMenu(
                 text: "Wishlist",
                 icon: "assets/icons/Heart Icon.svg",
-                press: () {},
+                press: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (ctx) => ListWishlistVertical(
+                          wishlistPlaces:
+                              user != null ? user!.wishlistPlaces : [],
+                          wishlistHotels:
+                              user != null ? user!.wishlistHotels : [],
+                          wishlistRestaurants:
+                              user != null ? user!.wishlistRestaurants : [])));
+                },
               ),
               ProfileMenu(
-                text: "Reviews",
+                text: "Visited",
                 icon: "assets/icons/Gift Icon.svg",
-                press: () {},
+                press: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (ctx) => ListVisitedVertical(
+                          visitedPlaces:
+                              user != null ? user!.visitedPlaces : [],
+                          visitedHotels:
+                              user != null ? user!.visitedHotels : [],
+                          visitedRestaurants:
+                              user != null ? user!.visitedRestaurants : [])));
+                },
               ),
               ProfileMenu(
                 text: "Help Center",
@@ -52,7 +98,13 @@ class MyPage extends StatelessWidget {
               ProfileMenu(
                 text: "Log Out",
                 icon: "assets/icons/Log out.svg",
-                press: () {},
+                press: () async {
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  prefs.remove('email');
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => SignInScreen()));
+                },
               ),
             ],
           ),

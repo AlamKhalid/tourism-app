@@ -95,13 +95,13 @@ class _SignFormState extends State<SignForm> {
                 if (response == "success") {
                   SharedPreferences prefs =
                       await SharedPreferences.getInstance();
-                  prefs.setString('email', 'useremail@gmail.com');
+                  prefs.setString('email', email!);
                   Navigator.of(context).popUntil((route) => route.isFirst);
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (context) => LoginSuccessScreen()));
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Email already taken')));
+                      SnackBar(content: Text('Credentials don\'t match')));
                 }
               }
             },

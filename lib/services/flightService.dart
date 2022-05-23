@@ -15,7 +15,7 @@ Future<List<Flight>> fetchFlights(to, from, adults, date) async {
   });
   final response = await http.get(uri, headers: {
     'X-RapidAPI-Host': 'flight-fare-search.p.rapidapi.com',
-    'X-RapidAPI-Key': '5b58ba035fmshf4aa99b9a16c28ep13789ajsncc271b048c00'
+    'X-RapidAPI-Key': '5d599dbcefmsh9b7d550a5907d7ep1688b4jsna84d27708024'
   });
 
   if (response.statusCode == 200) {

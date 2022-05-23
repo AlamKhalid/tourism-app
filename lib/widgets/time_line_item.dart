@@ -64,7 +64,7 @@ class TimeLineItem extends StatelessWidget {
                       Container(
                         height: 120,
                         width: 200,
-                        child: Image.asset(
+                        child: Image.network(
                           img,
                           fit: BoxFit.cover,
                         ),
@@ -73,6 +73,7 @@ class TimeLineItem extends StatelessWidget {
                       Text(
                         title,
                         style: TextStyle(
+                            overflow: TextOverflow.ellipsis,
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
                             color: AppColors.mainColor),

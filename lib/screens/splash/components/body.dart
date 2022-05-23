@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tourism_app/widgets/common/common_header.dart';
-import '../../../pages/detail_pages.dart';
+import '../../../pages/detail_places.dart';
 import 'package:tourism_app/widgets/timeline.dart';
 import '../../../pages/navpages/main_page.dart';
 import '/constants.dart';

@@ -28,13 +28,16 @@ class _LandingPageState extends State<LandingPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Header(),
-          Expanded(
-            child: ListView.builder(
-                padding: EdgeInsets.only(top: 20),
-                itemCount: cities.length,
-                itemBuilder: ((context, index) => TopPlaces(
-                    city: cities[index].name, places: cities[index].places))),
-          )
+          cities.length > 0
+              ? Expanded(
+                  child: ListView.builder(
+                      padding: EdgeInsets.only(top: 20),
+                      itemCount: cities.length,
+                      itemBuilder: ((context, index) => TopPlaces(
+                          city: cities[index].name,
+                          places: cities[index].places))),
+                )
+              : Expanded(child: Center(child: CircularProgressIndicator())),
         ],
       ),
     );

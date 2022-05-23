@@ -6,6 +6,7 @@ import '../misc/colors.dart';
 
 class ListPlacesVertical extends StatelessWidget {
   final List<Place> places;
+  
   const ListPlacesVertical({Key? key, required this.places}) : super(key: key);
 
   @override

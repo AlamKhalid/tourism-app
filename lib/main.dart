@@ -4,7 +4,7 @@ import 'package:tourism_app/provider/city.dart';
 import 'package:tourism_app/screens/sign_in/sign_in_screen.dart';
 import 'package:tourism_app/screens/sign_up/sign_up_screen.dart';
 import 'package:tourism_app/screens/splash/splash_screen.dart';
-import './pages/detail_pages.dart';
+import 'pages/detail_places.dart';
 import './pages/navpages/main_page.dart';
 import './pages/welcome_page.dart';
 import './size_config.dart';
@@ -22,6 +22,7 @@ Future<void> main() async {
   email = prefs.getString('email');
   await prefs.setInt("initScreen", 1);
   print('initScreen ${initScreen}');
+  print('email ${email}');
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => CityNotifier()),
   ], child: MyApp()));
@@ -42,13 +43,14 @@ class MyApp extends StatelessWidget {
         SignInScreen.routeName: (context) => SignInScreen(),
         WelcomePage.routeName: (context) => SplashScreen(),
         LandingPage.routeName: (context) => LandingPage(),
+        MainPage.routeName: (context) => MainPage(),
         '/': (context) => SplashScreen(),
       },
       initialRoute: initScreen == null
           ? '/'
           : email == null
               ? SignInScreen.routeName
-              : LandingPage.routeName,
+              : MainPage.routeName,
       // home: WelcomePage(),
     );
   }

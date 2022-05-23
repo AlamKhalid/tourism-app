@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tourism_app/misc/colors.dart';
-import 'package:tourism_app/pages/detail_pages.dart';
+import 'package:tourism_app/models/place.dart';
+import 'package:tourism_app/pages/detail_places.dart';
+import 'package:tourism_app/provider/city.dart';
 import 'package:tourism_app/widgets/common/app_large_text.dart';
 import '../../constants.dart';
 
-class Header extends StatelessWidget {
+class Header extends StatefulWidget {
   final String heading;
   final bool back;
   const Header({Key? key, this.heading = 'Discover', this.back = false})
       : super(key: key);
+
+  @override
+  State<Header> createState() => _HeaderState();
+}
+
+class _HeaderState extends State<Header> {
+  var _searchController = TextEditingController();
 
   Widget build(BuildContext context) {
     return Container(
@@ -19,7 +29,7 @@ class Header extends StatelessWidget {
         children: <Widget>[
           Container(
             padding: EdgeInsets.only(
-              left: back ? 10 : 25,
+              left: widget.back ? 10 : 25,
               top: 30,
             ),
             height: 180,
@@ -32,14 +42,15 @@ class Header extends StatelessWidget {
             ),
             child: Row(
               children: <Widget>[
-                if (back)
+                if (widget.back)
                   IconButton(
                     padding: const EdgeInsets.all(0),
                     onPressed: () => Navigator.of(context).pop(),
                     color: Colors.white,
                     icon: Icon(Icons.arrow_back_ios_new),
                   ),
-                AppLargeText(text: heading, color: Colors.white, size: 36),
+                AppLargeText(
+                    text: widget.heading, color: Colors.white, size: 36),
               ],
             ),
           ),
@@ -67,6 +78,7 @@ class Header extends StatelessWidget {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
+                      controller: _searchController,
                       decoration: InputDecoration(
                         hintText: "Search Places",
                         hintStyle: TextStyle(
@@ -79,7 +91,14 @@ class Header extends StatelessWidget {
                         suffixIcon: GestureDetector(
                           onTap: () {
                             // find city and place first then call this page
-                            // Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailPage()))
+                            Place place = context
+                                .read<CityNotifier>()
+                                .searchPlace(_searchController.text);
+                            String cityText =
+                                context.read<CityNotifier>().cityFound;
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => DetailPlaces(
+                                    place: place, city: cityText)));
                             // otherwise if not found, show not found page, build one
                           },
                           child: Icon(
