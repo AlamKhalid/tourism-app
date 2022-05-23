@@ -95,14 +95,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 controller: _tabController,
                 children: [
                   ListPlacesVertical(places: city.places),
-                  ListHotelsVertical(
-                    hotels: city.hotels,
-                    city:widget.city
-                  ),
+                  ListHotelsVertical(hotels: city.hotels, city: widget.city),
                   ListRestaurantsVertical(
-                    restaurants: city.restaurants,
-                    city:widget.city
-                  ),
+                      restaurants: city.restaurants, city: widget.city),
                 ],
               ),
             ),
@@ -131,8 +126,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 size: 16,
                 color: Colors.white),
             onPressed: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => TimeLines()));
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => TimeLines(
+                        city: widget.city,
+                      )));
             },
           ),
         ),

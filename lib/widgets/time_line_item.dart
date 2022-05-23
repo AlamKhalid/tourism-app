@@ -64,7 +64,7 @@ class TimeLineItem extends StatelessWidget {
                       Container(
                         height: 120,
                         width: 200,
-                        child: Image.asset(
+                        child: Image.network(
                           img,
                           fit: BoxFit.cover,
                         ),
