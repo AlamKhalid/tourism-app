@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tourism_app/models/place.dart';
-import 'package:tourism_app/pages/detail_pages.dart';
+import 'package:tourism_app/pages/detail_places.dart';
 import '../misc/colors.dart';
 import 'common/app_large_text.dart';
 import 'common/app_text.dart';
@@ -27,7 +27,7 @@ class PageItem extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => DetailPage(
+              builder: (context) => DetailPlaces(
                     place: place,
                     city: city,
                   )));

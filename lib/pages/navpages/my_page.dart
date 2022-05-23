@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tourism_app/misc/colors.dart';
 import 'package:tourism_app/widgets/common/app_large_text.dart';
 import 'package:tourism_app/widgets/common/common_header.dart';
 import 'package:tourism_app/widgets/profile_menu.dart';
 import 'package:tourism_app/widgets/profile_pic.dart';
+
+import '../../screens/sign_in/sign_in_screen.dart';
 
 class MyPage extends StatelessWidget {
   const MyPage({Key? key}) : super(key: key);
@@ -52,7 +55,13 @@ class MyPage extends StatelessWidget {
               ProfileMenu(
                 text: "Log Out",
                 icon: "assets/icons/Log out.svg",
-                press: () {},
+                press: () async {
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  prefs.remove('email');
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => SignInScreen()));
+                },
               ),
             ],
           ),

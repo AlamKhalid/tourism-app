@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tourism_app/misc/colors.dart';
 import 'package:tourism_app/models/city.dart';
-import 'package:tourism_app/pages/detail_pages.dart';
+import 'package:tourism_app/pages/detail_places.dart';
 import 'package:tourism_app/widgets/common/app_large_text.dart';
 import 'package:tourism_app/widgets/common/app_text.dart';
 import 'package:tourism_app/widgets/common/header.dart';
@@ -97,9 +97,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   ListPlacesVertical(places: city.places),
                   ListHotelsVertical(
                     hotels: city.hotels,
+                    city:widget.city
                   ),
                   ListRestaurantsVertical(
                     restaurants: city.restaurants,
+                    city:widget.city
                   ),
                 ],
               ),
