@@ -101,7 +101,7 @@ class _SignFormState extends State<SignForm> {
                       builder: (context) => LoginSuccessScreen()));
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Email already taken')));
+                      SnackBar(content: Text('Credentials don\'t match')));
                 }
               }
             },

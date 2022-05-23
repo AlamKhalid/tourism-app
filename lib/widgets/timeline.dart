@@ -25,27 +25,92 @@ class TimeLines extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CommonHeader(title: 'Itinerary Planner'),
             SizedBox(height: 50),
+            Container(
+              margin: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(3.0),
+              decoration: BoxDecoration(
+                border: Border.all(width: 3, color: AppColors.textColor1),
+              ),
+              child: Text(
+                'DAY 1',
+                style: TextStyle(fontSize: 25),
+              ),
+            ),
             TimeLineItem(
-                startTime: "10:00",
-                endTime: '01:00',
+                startTime: "10:00 am",
+                endTime: '01:00 pm',
                 title: city1.places[0].name,
                 city: city,
                 img: (city1.places[0].images[0])),
             TimeLineItem(
-                startTime: "10:00",
-                endTime: '01:00',
+                startTime: "1:00 pm",
+                endTime: '3:00 pm',
                 title: city1.places[1].name,
                 city: city,
                 img: (city1.places[1].images[0])),
             TimeLineItem(
-                startTime: "10:00",
-                endTime: '01:00',
+                startTime: "3:00 pm",
+                endTime: '4:00 pm',
+                title: city1.restaurants[2].name,
+                city: city,
+                img: (city1.restaurants[2].images[0])),
+            TimeLineItem(
+                startTime: "4:00pm",
+                endTime: '7:00pm',
                 title: city1.places[2].name,
                 city: city,
                 img: (city1.places[2].images[0])),
+            TimeLineItem(
+                startTime: "7:00pm",
+                endTime: '10:00pm',
+                title: city1.hotels[6].name,
+                city: city,
+                img: (city1.hotels[6].images[0])),
+            Container(
+              margin: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(3.0),
+              decoration: BoxDecoration(
+                border: Border.all(width: 3, color: AppColors.textColor1),
+              ),
+              child: Text(
+                'DAY 2',
+                style: TextStyle(fontSize: 25),
+              ),
+            ),
+            TimeLineItem(
+                startTime: "10:00 am",
+                endTime: '01:00 pm',
+                title: city1.places[0].name,
+                city: city,
+                img: (city1.places[0].images[0])),
+            TimeLineItem(
+                startTime: "1:00 pm",
+                endTime: '3:00 pm',
+                title: city1.places[1].name,
+                city: city,
+                img: (city1.places[1].images[0])),
+            TimeLineItem(
+                startTime: "3:00 pm",
+                endTime: '4:00 pm',
+                title: city1.restaurants[2].name,
+                city: city,
+                img: (city1.restaurants[2].images[0])),
+            TimeLineItem(
+                startTime: "7:00pm",
+                endTime: '10:00pm',
+                title: city1.places[2].name,
+                city: city,
+                img: (city1.places[2].images[0])),
+            TimeLineItem(
+                startTime: "4:00pm",
+                endTime: '7:00pm',
+                title: city1.hotels[6].name,
+                city: city,
+                img: (city1.hotels[6].images[0])),
           ],
         ),
       ),

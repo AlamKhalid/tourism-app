@@ -73,6 +73,7 @@ class TimeLineItem extends StatelessWidget {
                       Text(
                         title,
                         style: TextStyle(
+                            overflow: TextOverflow.ellipsis,
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
                             color: AppColors.mainColor),

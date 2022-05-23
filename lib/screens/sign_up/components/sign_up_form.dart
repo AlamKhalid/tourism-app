@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tourism_app/pages/navpages/main_page.dart';
 import 'package:tourism_app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:tourism_app/services/userService.dart';
@@ -67,6 +68,9 @@ class _SignUpFormState extends State<SignUpForm> {
                   loggingIn = false;
                 });
                 if (response == "success") {
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  prefs.setString('email', 'useremail@gmail.com');
                   Navigator.of(context).popUntil((route) => route.isFirst);
                   Navigator.of(context).pushReplacement(
                       MaterialPageRoute(builder: (context) => MainPage()));
