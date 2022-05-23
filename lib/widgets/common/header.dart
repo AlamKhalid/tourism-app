@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tourism_app/misc/colors.dart';
+import 'package:tourism_app/pages/detail_pages.dart';
 import 'package:tourism_app/widgets/common/app_large_text.dart';
 import '../../constants.dart';
 
@@ -67,21 +68,26 @@ class Header extends StatelessWidget {
                   Expanded(
                     child: TextField(
                       decoration: InputDecoration(
-                          hintText: "Search Places",
-                          hintStyle: TextStyle(
+                        hintText: "Search Places",
+                        hintStyle: TextStyle(
+                          color: AppColors.textColor1,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        contentPadding: EdgeInsets.symmetric(vertical: 15),
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            // find city and place first then call this page
+                            // Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailPage()))
+                            // otherwise if not found, show not found page, build one
+                          },
+                          child: Icon(
+                            Icons.search,
                             color: AppColors.textColor1,
-                            fontWeight: FontWeight.w400,
                           ),
-                          enabledBorder: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          contentPadding: EdgeInsets.symmetric(vertical: 15),
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.search),
-                            onPressed: () {},
-                          )),
-                      onSubmitted: (value) {
-                        print(value);
-                      },
+                        ),
+                      ),
                     ),
                   ),
                 ],
